@@ -15,7 +15,7 @@ Este repositorio contiene la base de datos Northwind y las soluciones de los 20 
 
 ## Diagrama entidad–relación
 
-![Diagrama ER de la base de datos Northwind](img/diagrama-er.png)
+![Diagrama ER de la base de datos Northwind](img/diagrama.png)
 
 ## Índice
 
