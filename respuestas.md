@@ -8,7 +8,7 @@ WHERE discontinued = 0 AND unit_price BETWEEN 10 AND 50
 ORDER BY precio DESC;
 ```
 
-![Resultado de la pregunta 1](1.PNG)
+![Resultado de la pregunta 1](img/1.PNG)
 
 ## Pregunta 2 — Concentración geográfica de la cartera
 
@@ -18,7 +18,7 @@ GROUP BY country HAVING COUNT(*) >= 5
 ORDER BY num_clientes DESC;
 ```
 
-![Resultado de la pregunta 2](2.PNG)
+![Resultado de la pregunta 2](img/2.PNG)
 
 ## Pregunta 3 — Alerta de reposición
 
@@ -29,7 +29,7 @@ CASE WHEN units_in_stock = 0 THEN 'CRÍTICO' ELSE 'AVISO' END AS situacion FROM 
 WHERE discontinued = 0 AND units_in_stock <= reorder_level;
 ```
 
-![Resultado de la pregunta 3](3.PNG)
+![Resultado de la pregunta 3](img/3.PNG)
 
 
 ## Pregunta 4 — Ficha completa de producto
@@ -41,7 +41,7 @@ INNER JOIN suppliers s ON p.supplier_id = s.supplier_id
 WHERE s.country IN ('Italy', 'France', 'Spain') ORDER BY pais, producto;
 ```
 
-![Resultado de la pregunta 4](4.PNG)
+![Resultado de la pregunta 4](img/4.PNG)
 
 ## Pregunta 5 — Detalle valorizado de un pedido
 
@@ -55,7 +55,7 @@ INNER JOIN customers c USING (customer_id)
 WHERE ord.order_id = 10248;
 ```
 
-![Resultado de la pregunta 5](5.PNG)
+![Resultado de la pregunta 5](img/5.PNG)
 
 ## Pregunta 6 — Ranking de categorías por facturación
 
@@ -69,7 +69,7 @@ HAVING SUM(od.unit_price::numeric * od.quantity * (1 - od.discount::numeric)) > 
 ORDER BY facturacion DESC;
 ```
 
-![Resultado de la pregunta 6](6.PNG)
+![Resultado de la pregunta 6](img/6.PNG)
 
 ## Pregunta 7 — Clientes sin actividad comercial
 
@@ -81,7 +81,7 @@ GROUP BY c.customer_id, c.company_name, c.country
 ORDER BY COUNT(o.order_id) ASC, cliente ASC;
 ```
 
-![Resultado de la pregunta 7](7.PNG)
+![Resultado de la pregunta 7](img/7.PNG)
 
 ## Pregunta 8 — Organigrama de la fuerza de ventas
 
@@ -93,7 +93,7 @@ LEFT JOIN employees jefe ON emp.reports_to = jefe.employee_id
 ORDER BY empleado;
 ```
 
-![Resultado de la pregunta 8](8.PNG)
+![Resultado de la pregunta 8](img/8.PNG)
 
 ## Pregunta 9 — Rejilla de cobertura categoría × año
 
@@ -111,7 +111,7 @@ LEFT JOIN (
 ORDER BY categoria, anio;
 ```
 
-![Resultado de la pregunta 9](9.PNG)
+![Resultado de la pregunta 9](img/9.PNG)
 
 ## Pregunta 10 — Mapa de países: clientes frente a proveedores
 
@@ -130,7 +130,7 @@ FULL JOIN (SELECT country AS pais, COUNT(*) AS num_proveedores FROM suppliers GR
 ORDER BY pais;
 ```
 
-![Resultado de la pregunta 10](10.PNG)
+![Resultado de la pregunta 10](img/10.PNG)
 
 ## Pregunta 11 — Directorio unificado de contactos
 
@@ -144,7 +144,7 @@ SELECT 'EMPLEADO' AS origen, UPPER(first_name || ' ' || last_name) AS contacto, 
 ORDER BY origen, pais;
 ```
 
-![Resultado de la pregunta 11](11.PNG)
+![Resultado de la pregunta 11](img/11.PNG)
 
 ## Pregunta 12 — Mercados con desequilibrio
 
@@ -158,7 +158,7 @@ SELECT country AS pais FROM suppliers
 ORDER BY pais;
 ```
 
-![Resultado de la pregunta 12a](12a.PNG)
+![Resultado de la pregunta 12a](img/12a.PNG)
 
 ### b) Países con clientes y proveedores
 
@@ -170,7 +170,7 @@ SELECT country AS pais FROM suppliers
 ORDER BY pais;
 ```
 
-![Resultado de la pregunta 12b](12b.PNG)
+![Resultado de la pregunta 12b](img/12b.PNG)
 
 ## Pregunta 13 — Clientes que nunca han comprado pescado
 
@@ -188,7 +188,7 @@ GROUP BY c.customer_id, c.company_name, c.country
 ORDER BY pedidos_realizados DESC, cliente;
 ```
 
-![Resultado de la pregunta 13](13.PNG)
+![Resultado de la pregunta 13](img/13.PNG)
 
 ## Pregunta 14 — Productos por encima de la media
 
@@ -202,7 +202,7 @@ WHERE discontinued = 0 AND unit_price::numeric > (SELECT AVG(unit_price::numeric
 ORDER BY diferencia DESC;
 ```
 
-![Resultado de la pregunta 14](14.PNG)
+![Resultado de la pregunta 14](img/14.PNG)
 
 ## Pregunta 15 — Ticket medio por cliente
 
@@ -222,7 +222,7 @@ GROUP BY c.customer_id, c.company_name, c.country
 ORDER BY ticket_medio DESC LIMIT 15;
 ```
 
-![Resultado de la pregunta 15](15.PNG)
+![Resultado de la pregunta 15](img/15.PNG)
 
 ## Pregunta 16 — El producto más caro de cada categoría
 
@@ -236,7 +236,7 @@ WHERE p.unit_price = (SELECT MAX(p3.unit_price) FROM products p3 WHERE p3.catego
 ORDER BY categoria;
 ```
 
-![Resultado de la pregunta 16](16.PNG)
+![Resultado de la pregunta 16](img/16.PNG)
 
 ## Pregunta 17 — Segmentación ABC de la cartera de clientes
 
@@ -280,7 +280,7 @@ GROUP BY s.segmento, t.facturacion_total
 ORDER BY segmento;
 ```
 
-![Resultado de la pregunta 17](17.PNG)
+![Resultado de la pregunta 17](img/17.PNG)
 
 ## Pregunta 18 — Los tres productos más vendidos de cada categoría
 
@@ -310,7 +310,7 @@ WHERE posicion_en_categoria <= 3
 ORDER BY categoria, posicion_en_categoria;
 ```
 
-![Resultado de la pregunta 18](18.PNG)
+![Resultado de la pregunta 18](img/18.PNG)
 
 ## Pregunta 19 — Evolución mensual con acumulado y media móvil
 
@@ -343,7 +343,7 @@ FROM evolucion
 ORDER BY mes;
 ```
 
-![Resultado de la pregunta 19](19.PNG)
+![Resultado de la pregunta 19](img/19.PNG)
 
 ## Pregunta 20 — Cuadro de mando anual por categoría
 
@@ -403,4 +403,4 @@ FROM con_total
 ORDER BY es_total, categoria;
 ```
 
-![Resultado de la pregunta 20](20.PNG)
+![Resultado de la pregunta 20](img/20.PNG)
